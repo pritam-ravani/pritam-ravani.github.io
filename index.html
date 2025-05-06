@@ -1,108 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-
+  <title>Alex Chen - AI Engineer & Developer</title>
+  <style>
+    :root {
+      --bg-color: #f5f1e8;
+      --text-color: #333333;
+      --link-color: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text-color);
+    }
+    
+    nav {
+      margin-bottom: 3rem;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      display: flex;
+    }
+    
+    nav li {
+      margin-right: 2rem;
+    }
+    
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 3rem;
+    }
+    
+    h3 {
+      font-size: 1rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    section {
+      margin-bottom: 3rem;
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .skill {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    
+    .projects {
+      margin-top: 1rem;
+    }
+    
+    .project {
+      margin-bottom: 2rem;
+    }
+    
+    .tags {
+      margin: 0.5rem 0;
+    }
+    
+    .contact-info {
+      margin-bottom: 2rem;
+    }
+    
+    footer {
+      margin-top: 3rem;
+      border-top: 1px solid var(--text-color);
+      padding-top: 1rem;
+    }
+    
+    @media (min-width: 600px) {
+      .skill {
+        width: 50%;
+      }
+    }
+  </style>
 </head>
-
 <body>
   <header>
-    <div class="container">
-      <h1 class="logo">Pritam Ravani</h1>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <h1>> Alex Chen / AI Engineer</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">about</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section id="about-me" class="section">
-    <div class="container">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-me-content">
-        <!-- <img src="profile.jpg" alt="Profile Picture" class="profile-image"> -->
-        <p class="about-me-description">I am a Computer Science Engineering student with a passion for coding and technology. I have a strong foundation in programming languages such as C, Java, and Python, as well as web development technologies including HTML, CSS, and JavaScript. I am currently pursuing my degree in Computer Science Engineering from Uka Tarsadia University, where I have gained hands-on experience in various software development projects and team collaborations.</p>
-        <p class="about-me-hobbies">In my free time, I enjoy solving coding challenges, exploring new technologies, and contributing to open-source projects. I also love staying up-to-date with the latest advancements in the field of computer science and attending tech meetups and workshops to enhance my skills. Besides coding, I enjoy traveling to new places.</p>
-      </div>
-    </div>
-  </section>
-  
-  <section id="skills" class="section">
-    <div class="container">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-content">
-        <div class="skill-item">
-          <h3 class="skill-title">HTML/CSS</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 10%;"></div>
-          </div>
+  <main>
+    <section id="about">
+      <h2>> about</h2>
+      <p>I'm Alex, an AI engineer with 5+ years of experience in machine learning, deep learning, and software development. I specialize in developing AI solutions that bridge the gap between theoretical research and practical applications.</p>
+      <p>My journey in AI began during my graduate studies in Computer Science, where I focused on natural language processing and computer vision. Since then, I've worked with startups and established companies to implement AI systems that drive business value.</p>
+      <p>When I'm not coding or training models, you can find me contributing to open-source projects, writing technical articles, or exploring the latest developments in the field of artificial intelligence.</p>
+      <p><a href="#">download resume</a></p>
+    </section>
+
+    <section id="skills">
+      <h2>> skills</h2>
+      <div class="skills">
+        <div class="skill">
+          <h3>Machine Learning</h3>
+          <p>Expert in supervised and unsupervised learning algorithms, feature engineering, model evaluation, and hyperparameter tuning.</p>
         </div>
-        <div class="skill-item">
-          <h3 class="skill-title">JavaScript</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 10%;"></div>
-          </div>
+        <div class="skill">
+          <h3>Deep Learning</h3>
+          <p>Proficient in designing and implementing neural networks using TensorFlow and PyTorch for computer vision and NLP tasks.</p>
         </div>
-        <div class="skill-item">
-          <h3 class="skill-title">PHP</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 10%;"></div>
-          </div>
+        <div class="skill">
+          <h3>NLP & LLMs</h3>
+          <p>Experience with transformer models, text classification, sentiment analysis, and building conversational AI systems.</p>
         </div>
-        <div class="skill-item">
-          <h3 class="skill-title">MySQL</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 10%;"></div>
-          </div>
+        <div class="skill">
+          <h3>MLOps</h3>
+          <p>Skilled in ML pipelines, model deployment, monitoring, and maintenance using tools like Docker, Kubernetes, and cloud services.</p>
+        </div>
+        <div class="skill">
+          <h3>Software Engineering</h3>
+          <p>Strong foundation in software design patterns, API development, and clean, maintainable code practices.</p>
+        </div>
+        <div class="skill">
+          <h3>Data Engineering</h3>
+          <p>Proficient in data processing, ETL pipelines, and working with large-scale datasets using Spark and SQL.</p>
         </div>
       </div>
-    </div>
-  </section>
-  
+    </section>
 
-  <section id="projects">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="project">
-        <img src="project1.jpg" alt="Project 1">
-        <h3>Project 1</h3>
-       <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lobortis justo ut neque ultrices
-           volutpat. Curabitur ac justo aliquam, consequat mi eget, fermentum orci.</p> 
-      </div> -->
-      <div class="project">
-        <img src="project2.jpg" alt="Project 2">
-        <h3>Project 2</h3>
-        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lobortis justo ut neque ultrices
-          volutpat. Curabitur ac justo aliquam, consequat mi eget, fermentum orci.</p>
-      </div> -->
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-       <!--<h2>Contact Me</h2> -->
-        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="pritam-ravani-71310a1a6" data-version="v1"> -->
-           <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/pritam-ravani-71310a1a6?trk=profile-badge"></a>
+    <section id="projects">
+      <h2>> projects</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>Intelligent Document Processor</h3>
+          <p>An AI-powered document processing system that extracts structured information from unstructured documents using NLP and computer vision techniques.</p>
+          <p class="tags">PyTorch | OCR | NLP | FastAPI</p>
+          <p><a href="#">view project</a></p>
         </div>
-    </div>
-  </section>
+        <div class="project">
+          <h3>Real-time Emotion Recognition</h3>
+          <p>A computer vision application that detects and classifies human emotions from facial expressions in real-time video streams.</p>
+          <p class="tags">TensorFlow | Computer Vision | OpenCV | Flask</p>
+          <p><a href="#">view project</a></p>
+        </div>
+        <div class="project">
+          <h3>Conversational AI Assistant</h3>
+          <p>A domain-specific conversational AI assistant built using large language models and fine-tuned for customer support in the healthcare industry.</p>
+          <p class="tags">LLMs | Transformer Models | NLP | React</p>
+          <p><a href="#">view project</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>> contact</h2>
+      <div class="contact-info">
+        <p>Email: alex@aiengineering.dev</p>
+        <p>Phone: +1 (555) 123-4567</p>
+        <p>Location: San Francisco, CA</p>
+        <p>
+          <a href="#">GitHub</a> | 
+          <a href="#">LinkedIn</a> | 
+          <a href="#">Twitter</a> | 
+          <a href="#">Medium</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="container">
-      <p>&copy; 2023 Pritam Ravani. All rights reserved.</p>
-    </div>
- 
-              
+    <p>&copy; 2025 Alex Chen</p>
   </footer>
-
 </body>
-
 </html>
