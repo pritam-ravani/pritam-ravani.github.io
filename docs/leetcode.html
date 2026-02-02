@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeetCode Guide | Pritam Ravani</title>
+  <style>
+    :root {
+      --bg-color: #f5f1e8;
+      --text-color: #333333;
+      --link-color: #333333;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text-color);
+    }
+    
+    a:hover {
+      opacity: 0.7;
+    }
+    
+    nav {
+      margin-bottom: 3rem;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    nav li {
+      margin-right: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 3rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    h2:hover {
+      opacity: 0.7;
+    }
+    
+    h3 {
+      font-size: 1rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    section {
+      margin-bottom: 3rem;
+    }
+    
+    .stats {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .stat {
+      flex: 1;
+      min-width: 120px;
+    }
+    
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    .controls {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--text-color);
+    }
+    
+    .search-box {
+      margin-bottom: 1rem;
+    }
+    
+    .search-box input {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      border: 1px solid var(--text-color);
+      color: var(--text-color);
+      padding: 0.5rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+    
+    .search-box input:focus {
+      outline: 2px solid var(--text-color);
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      border: 1px solid var(--text-color);
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .btn:hover {
+      background-color: var(--text-color);
+      color: var(--bg-color);
+    }
+    
+    .btn.active {
+      background-color: var(--text-color);
+      color: var(--bg-color);
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--text-color);
+    }
+    
+    .section-title {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+    
+    .collapse-icon {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    
+    .section.collapsed .collapse-icon {
+      transform: rotate(-90deg);
+    }
+    
+    .section.collapsed .problem-list {
+      display: none;
+    }
+    
+    .tag {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      font-style: italic;
+    }
+    
+    .progress-text {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    .problem-list {
+      margin-bottom: 2rem;
+    }
+    
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.5rem 0;
+      gap: 1rem;
+    }
+    
+    .problem-item:hover {
+      opacity: 0.7;
+    }
+    
+    .checkbox-wrapper {
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    
+    .checkbox-wrapper input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    
+    .problem-info {
+      flex: 1;
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    
+    .problem-title {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .problem-item.completed .problem-title {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    
+    .difficulty {
+      font-size: 0.85rem;
+      padding: 0.1rem 0.5rem;
+      border: 1px solid var(--text-color);
+      white-space: nowrap;
+    }
+    
+    .difficulty.easy {
+      opacity: 0.6;
+    }
+    
+    .difficulty.medium {
+      opacity: 0.8;
+    }
+    
+    .difficulty.hard {
+      opacity: 1;
+    }
+    
+    .problem-link {
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--text-color);
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    @media (max-width: 600px) {
+      .problem-info {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .filter-buttons {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>> LeetCode Quickie Guide</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="#stats">stats</a></li>
+        <li><a href="#problems">problems</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="stats">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number" id="total-problems">0</div>
+          <div class="stat-label">total</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="completed-problems">0</div>
+          <div class="stat-label">completed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="progress-percentage">0%</div>
+          <div class="stat-label">progress</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="streak-count">0</div>
+          <div class="stat-label">day streak</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="search problems...">
+      </div>
+      <div class="filter-buttons">
+        <button class="btn active" onclick="filterDifficulty('all')">all</button>
+        <button class="btn" onclick="filterDifficulty('easy')">easy</button>
+        <button class="btn" onclick="filterDifficulty('medium')">medium</button>
+        <button class="btn" onclick="filterDifficulty('hard')">hard</button>
+        <button class="btn" onclick="showCompleted()">completed</button>
+        <button class="btn" onclick="showIncomplete()">incomplete</button>
+        <button class="btn" onclick="resetProgress()">reset all</button>
+      </div>
+    </section>
+
+    <section id="problems">
+      <!-- Problems will be dynamically inserted here -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 <a href="index.html">Pritam Ravani</a></p>
+  </footer>
+
+  <script>
+    const problemsData = {
+      "1. Arrays & Prefix": {
+        tag: "FOUNDATIONAL",
+        problems: [
+          { title: "Two Sum", difficulty: "easy", link: "https://leetcode.com/problems/two-sum/" },
+          { title: "Best Time to Buy and Sell Stock", difficulty: "easy", link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" },
+          { title: "Maximum Subarray", difficulty: "medium", link: "https://leetcode.com/problems/maximum-subarray/" },
+          { title: "Product of Array Except Self", difficulty: "medium", link: "https://leetcode.com/problems/product-of-array-except-self/" },
+          { title: "Find Pivot Index", difficulty: "easy", link: "https://leetcode.com/problems/find-pivot-index/" },
+          { title: "Range Sum Query – Immutable", difficulty: "easy", link: "https://leetcode.com/problems/range-sum-query-immutable/" },
+          { title: "Subarray Sum Equals K", difficulty: "medium", link: "https://leetcode.com/problems/subarray-sum-equals-k/" },
+          { title: "Continuous Subarray Sum", difficulty: "medium", link: "https://leetcode.com/problems/continuous-subarray-sum/" },
+          { title: "Minimum Size Subarray Sum", difficulty: "medium", link: "https://leetcode.com/problems/minimum-size-subarray-sum/" },
+          { title: "Kth Largest Element in an Array", difficulty: "medium", link: "https://leetcode.com/problems/kth-largest-element-in-an-array/" }
+        ]
+      },
+      "2. Hashing & Frequency": {
+        tag: "",
+        problems: [
+          { title: "Valid Anagram", difficulty: "easy", link: "https://leetcode.com/problems/valid-anagram/" },
+          { title: "Group Anagrams", difficulty: "medium", link: "https://leetcode.com/problems/group-anagrams/" },
+          { title: "Top K Frequent Elements", difficulty: "medium", link: "https://leetcode.com/problems/top-k-frequent-elements/" },
+          { title: "Longest Consecutive Sequence", difficulty: "medium", link: "https://leetcode.com/problems/longest-consecutive-sequence/" },
+          { title: "First Unique Character in a String", difficulty: "easy", link: "https://leetcode.com/problems/first-unique-character-in-a-string/" },
+          { title: "Contains Duplicate", difficulty: "easy", link: "https://leetcode.com/problems/contains-duplicate/" },
+          { title: "Word Pattern", difficulty: "easy", link: "https://leetcode.com/problems/word-pattern/" },
+          { title: "Isomorphic Strings", difficulty: "easy", link: "https://leetcode.com/problems/isomorphic-strings/" }
+        ]
+      },
+      "3. Two Pointers / Sliding Window": {
+        tag: "CRITICAL",
+        problems: [
+          { title: "Valid Palindrome", difficulty: "easy", link: "https://leetcode.com/problems/valid-palindrome/" },
+          { title: "Container With Most Water", difficulty: "medium", link: "https://leetcode.com/problems/container-with-most-water/" },
+          { title: "3Sum", difficulty: "medium", link: "https://leetcode.com/problems/3sum/" },
+          { title: "Longest Substring Without Repeating Characters", difficulty: "medium", link: "https://leetcode.com/problems/longest-substring-without-repeating-characters/" },
+          { title: "Minimum Window Substring", difficulty: "hard", link: "https://leetcode.com/problems/minimum-window-substring/" },
+          { title: "Permutation in String", difficulty: "medium", link: "https://leetcode.com/problems/permutation-in-string/" },
+          { title: "Sliding Window Maximum", difficulty: "hard", link: "https://leetcode.com/problems/sliding-window-maximum/" },
+          { title: "Longest Repeating Character Replacement", difficulty: "medium", link: "https://leetcode.com/problems/longest-repeating-character-replacement/" },
+          { title: "Subarrays with K Different Integers", difficulty: "hard", link: "https://leetcode.com/problems/subarrays-with-k-different-integers/" },
+          { title: "Max Consecutive Ones III", difficulty: "medium", link: "https://leetcode.com/problems/max-consecutive-ones-iii/" }
+        ]
+      },
+      "4. Binary Search": {
+        tag: "on Answer Space",
+        problems: [
+          { title: "Binary Search", difficulty: "easy", link: "https://leetcode.com/problems/binary-search/" },
+          { title: "Search in Rotated Sorted Array", difficulty: "medium", link: "https://leetcode.com/problems/search-in-rotated-sorted-array/" },
+          { title: "Find Minimum in Rotated Sorted Array", difficulty: "medium", link: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" },
+          { title: "Koko Eating Bananas", difficulty: "medium", link: "https://leetcode.com/problems/koko-eating-bananas/" },
+          { title: "Capacity To Ship Packages Within D Days", difficulty: "medium", link: "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/" },
+          { title: "Split Array Largest Sum", difficulty: "hard", link: "https://leetcode.com/problems/split-array-largest-sum/" },
+          { title: "Median of Two Sorted Arrays", difficulty: "hard", link: "https://leetcode.com/problems/median-of-two-sorted-arrays/" },
+          { title: "Find Peak Element", difficulty: "medium", link: "https://leetcode.com/problems/find-peak-element/" }
+        ]
+      },
+      "5. Stack / Monotonic Stack": {
+        tag: "",
+        problems: [
+          { title: "Valid Parentheses", difficulty: "easy", link: "https://leetcode.com/problems/valid-parentheses/" },
+          { title: "Daily Temperatures", difficulty: "medium", link: "https://leetcode.com/problems/daily-temperatures/" },
+          { title: "Next Greater Element I", difficulty: "easy", link: "https://leetcode.com/problems/next-greater-element-i/" },
+          { title: "Next Greater Element II", difficulty: "medium", link: "https://leetcode.com/problems/next-greater-element-ii/" },
+          { title: "Largest Rectangle in Histogram", difficulty: "hard", link: "https://leetcode.com/problems/largest-rectangle-in-histogram/" },
+          { title: "Trapping Rain Water", difficulty: "hard", link: "https://leetcode.com/problems/trapping-rain-water/" }
+        ]
+      },
+      "6. Trees": {
+        tag: "Recursive Discipline",
+        problems: [
+          { title: "Maximum Depth of Binary Tree", difficulty: "easy", link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/" },
+          { title: "Invert Binary Tree", difficulty: "easy", link: "https://leetcode.com/problems/invert-binary-tree/" },
+          { title: "Diameter of Binary Tree", difficulty: "easy", link: "https://leetcode.com/problems/diameter-of-binary-tree/" },
+          { title: "Binary Tree Maximum Path Sum", difficulty: "hard", link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/" },
+          { title: "Lowest Common Ancestor of a Binary Tree", difficulty: "medium", link: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" },
+          { title: "Path Sum II", difficulty: "medium", link: "https://leetcode.com/problems/path-sum-ii/" },
+          { title: "Serialize and Deserialize Binary Tree", difficulty: "hard", link: "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" },
+          { title: "Construct Binary Tree from Preorder and Inorder Traversal", difficulty: "medium", link: "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" },
+          { title: "Validate Binary Search Tree", difficulty: "medium", link: "https://leetcode.com/problems/validate-binary-search-tree/" }
+        ]
+      },
+      "7. Graphs": {
+        tag: "Traversal > Tricks",
+        problems: [
+          { title: "Number of Islands", difficulty: "medium", link: "https://leetcode.com/problems/number-of-islands/" },
+          { title: "Clone Graph", difficulty: "medium", link: "https://leetcode.com/problems/clone-graph/" },
+          { title: "Course Schedule", difficulty: "medium", link: "https://leetcode.com/problems/course-schedule/" },
+          { title: "Course Schedule II", difficulty: "medium", link: "https://leetcode.com/problems/course-schedule-ii/" },
+          { title: "Rotting Oranges", difficulty: "medium", link: "https://leetcode.com/problems/rotting-oranges/" },
+          { title: "Word Ladder", difficulty: "hard", link: "https://leetcode.com/problems/word-ladder/" },
+          { title: "Accounts Merge", difficulty: "medium", link: "https://leetcode.com/problems/accounts-merge/" },
+          { title: "Detect Cycle in Graph", difficulty: "medium", link: "https://leetcode.com/problems/find-eventual-safe-states/" },
+          { title: "Redundant Connection", difficulty: "medium", link: "https://leetcode.com/problems/redundant-connection/" },
+          { title: "Number of Connected Components", difficulty: "medium", link: "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/" }
+        ]
+      },
+      "8. Dynamic Programming": {
+        tag: "IMPLEMENTATION ONLY",
+        problems: [
+          { title: "Climbing Stairs", difficulty: "easy", link: "https://leetcode.com/problems/climbing-stairs/" },
+          { title: "House Robber", difficulty: "medium", link: "https://leetcode.com/problems/house-robber/" },
+          { title: "Coin Change", difficulty: "medium", link: "https://leetcode.com/problems/coin-change/" },
+          { title: "Longest Increasing Subsequence", difficulty: "medium", link: "https://leetcode.com/problems/longest-increasing-subsequence/" },
+          { title: "Longest Common Subsequence", difficulty: "medium", link: "https://leetcode.com/problems/longest-common-subsequence/" },
+          { title: "Edit Distance", difficulty: "medium", link: "https://leetcode.com/problems/edit-distance/" },
+          { title: "Partition Equal Subset Sum", difficulty: "medium", link: "https://leetcode.com/problems/partition-equal-subset-sum/" },
+          { title: "Target Sum", difficulty: "medium", link: "https://leetcode.com/problems/target-sum/" },
+          { title: "Unique Paths", difficulty: "medium", link: "https://leetcode.com/problems/unique-paths/" },
+          { title: "Minimum Path Sum", difficulty: "medium", link: "https://leetcode.com/problems/minimum-path-sum/" },
+          { title: "Decode Ways", difficulty: "medium", link: "https://leetcode.com/problems/decode-ways/" },
+          { title: "Word Break", difficulty: "medium", link: "https://leetcode.com/problems/word-break/" }
+        ]
+      },
+      "9. Greedy": {
+        tag: "Constraint Reasoning",
+        problems: [
+          { title: "Jump Game", difficulty: "medium", link: "https://leetcode.com/problems/jump-game/" },
+          { title: "Jump Game II", difficulty: "medium", link: "https://leetcode.com/problems/jump-game-ii/" },
+          { title: "Gas Station", difficulty: "medium", link: "https://leetcode.com/problems/gas-station/" },
+          { title: "Task Scheduler", difficulty: "medium", link: "https://leetcode.com/problems/task-scheduler/" },
+          { title: "Non-overlapping Intervals", difficulty: "medium", link: "https://leetcode.com/problems/non-overlapping-intervals/" },
+          { title: "Merge Intervals", difficulty: "medium", link: "https://leetcode.com/problems/merge-intervals/" }
+        ]
+      },
+      "10. Bit Manipulation": {
+        tag: "Low but Useful",
+        problems: [
+          { title: "Single Number", difficulty: "easy", link: "https://leetcode.com/problems/single-number/" },
+          { title: "Counting Bits", difficulty: "easy", link: "https://leetcode.com/problems/counting-bits/" },
+          { title: "Missing Number", difficulty: "easy", link: "https://leetcode.com/problems/missing-number/" },
+          { title: "Power of Two", difficulty: "easy", link: "https://leetcode.com/problems/power-of-two/" }
+        ]
+      },
+      "11. Design / Implementation-Heavy": {
+        tag: "",
+        problems: [
+          { title: "LRU Cache", difficulty: "medium", link: "https://leetcode.com/problems/lru-cache/" },
+          { title: "Implement Trie", difficulty: "medium", link: "https://leetcode.com/problems/implement-trie-prefix-tree/" },
+          { title: "Min Stack", difficulty: "medium", link: "https://leetcode.com/problems/min-stack/" },
+          { title: "Design Circular Queue", difficulty: "medium", link: "https://leetcode.com/problems/design-circular-queue/" },
+          { title: "Design HashMap", difficulty: "easy", link: "https://leetcode.com/problems/design-hashmap/" }
+        ]
+      }
+    };
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function init() {
+      renderProblems();
+      updateStats();
+      setupEventListeners();
+      updateStreak();
+    }
+
+    function renderProblems() {
+      const container = document.getElementById('problems');
+      container.innerHTML = '';
+
+      Object.keys(problemsData).forEach(sectionName => {
+        const sectionData = problemsData[sectionName];
+        const section = document.createElement('section');
+        section.className = 'section';
+        section.id = getSectionId(sectionName);
+
+        const completed = getCompletedCount(sectionName);
+        const total = sectionData.problems.length;
+
+        section.innerHTML = `
+          <div class="section-header" onclick="toggleSection('${getSectionId(sectionName)}')">
+            <div class="section-title">
+              <h2><span class="collapse-icon">▼</span> ${sectionName}</h2>
+              ${sectionData.tag ? `<span class="tag">${sectionData.tag}</span>` : ''}
+            </div>
+            <span class="progress-text">${completed}/${total}</span>
+          </div>
+          <div class="problem-list">
+            ${sectionData.problems.map((problem, index) => 
+              createProblemHTML(problem, sectionName, index)
+            ).join('')}
+          </div>
+        `;
+
+        container.appendChild(section);
+      });
+
+      applyFilters();
+    }
+
+    function createProblemHTML(problem, sectionName, index) {
+      const isCompleted = isProblemCompleted(sectionName, index);
+      return `
+        <div class="problem-item ${isCompleted ? 'completed' : ''}" 
+             data-difficulty="${problem.difficulty}" 
+             data-completed="${isCompleted}"
+             data-title="${problem.title.toLowerCase()}">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" 
+                   ${isCompleted ? 'checked' : ''} 
+                   onchange="toggleProblem('${sectionName}', ${index})">
+          </div>
+          <div class="problem-info">
+            <span class="problem-title">${problem.title}</span>
+            <span class="difficulty ${problem.difficulty}">[${problem.difficulty}]</span>
+            <a href="${problem.link}" target="_blank" class="problem-link">solve →</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleProblem(sectionName, index) {
+      const key = `${sectionName}-${index}`;
+      const storage = getProgress();
+      
+      if (storage[key]) {
+        delete storage[key];
+      } else {
+        storage[key] = {
+          completed: true,
+          date: new Date().toISOString()
+        };
+      }
+      
+      saveProgress(storage);
+      updateStreak();
+      renderProblems();
+      updateStats();
+    }
+
+    function isProblemCompleted(sectionName, index) {
+      const storage = getProgress();
+      const key = `${sectionName}-${index}`;
+      return !!storage[key];
+    }
+
+    function getCompletedCount(sectionName) {
+      const storage = getProgress();
+      let count = 0;
+      problemsData[sectionName].problems.forEach((_, index) => {
+        if (storage[`${sectionName}-${index}`]) count++;
+      });
+      return count;
+    }
+
+    function getProgress() {
+      const data = localStorage.getItem('leetcode-progress');
+      return data ? JSON.parse(data) : {};
+    }
+
+    function saveProgress(data) {
+      localStorage.setItem('leetcode-progress', JSON.stringify(data));
+    }
+
+    function updateStats() {
+      let total = 0;
+      let completed = 0;
+
+      Object.keys(problemsData).forEach(section => {
+        total += problemsData[section].problems.length;
+        completed += getCompletedCount(section);
+      });
+
+      document.getElementById('total-problems').textContent = total;
+      document.getElementById('completed-problems').textContent = completed;
+      document.getElementById('progress-percentage').textContent = 
+        total > 0 ? Math.round((completed / total) * 100) + '%' : '0%';
+    }
+
+    function updateStreak() {
+      const progress = getProgress();
+      const dates = Object.values(progress)
+        .map(p => new Date(p.date).toDateString())
+        .filter((date, index, self) => self.indexOf(date) === index)
+        .sort((a, b) => new Date(b) - new Date(a));
+
+      let streak = 0;
+      const today = new Date().toDateString();
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+      if (dates.length > 0) {
+        if (dates[0] === today || dates[0] === yesterday) {
+          streak = 1;
+          for (let i = 1; i < dates.length; i++) {
+            const currentDate = new Date(dates[i]);
+            const previousDate = new Date(dates[i - 1]);
+            const diff = (previousDate - currentDate) / 86400000;
+            if (diff === 1) {
+              streak++;
+            } else {
+              break;
+            }
+          }
+        }
+      }
+
+      document.getElementById('streak-count').textContent = streak;
+    }
+
+    function filterDifficulty(difficulty) {
+      currentFilter = difficulty;
+      applyFilters();
+      
+      document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function showCompleted() {
+      currentFilter = 'completed';
+      applyFilters();
+      document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function showIncomplete() {
+      currentFilter = 'incomplete';
+      applyFilters();
+      document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function applyFilters() {
+      document.querySelectorAll('.problem-item').forEach(item => {
+        let show = true;
+
+        if (currentFilter !== 'all' && currentFilter !== 'completed' && currentFilter !== 'incomplete') {
+          show = item.dataset.difficulty === currentFilter;
+        }
+
+        if (currentFilter === 'completed') {
+          show = item.dataset.completed === 'true';
+        } else if (currentFilter === 'incomplete') {
+          show = item.dataset.completed === 'false';
+        }
+
+        if (searchQuery && show) {
+          show = item.dataset.title.includes(searchQuery.toLowerCase());
+        }
+
+        item.style.display = show ? 'flex' : 'none';
+      });
+
+      document.querySelectorAll('.section').forEach(section => {
+        const visibleProblems = Array.from(section.querySelectorAll('.problem-item')).filter(
+          item => item.style.display !== 'none'
+        );
+        section.style.display = visibleProblems.length === 0 ? 'none' : 'block';
+      });
+    }
+
+    function setupEventListeners() {
+      const searchInput = document.getElementById('search-input');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        applyFilters();
+      });
+    }
+
+    function toggleSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      section.classList.toggle('collapsed');
+    }
+
+    function resetProgress() {
+      if (confirm('reset all progress? this cannot be undone.')) {
+        localStorage.removeItem('leetcode-progress');
+        renderProblems();
+        updateStats();
+        updateStreak();
+      }
+    }
+
+    function getSectionId(sectionName) {
+      return 'section-' + sectionName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
